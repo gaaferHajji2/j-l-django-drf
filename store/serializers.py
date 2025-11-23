@@ -44,7 +44,6 @@ from core.serializers import UserSerializer
 class CollectionSerializer(serializers.ModelSerializer):
 
     products_count = serializers.IntegerField(read_only=True)
-
     class Meta:
         model = Collection
         fields = ["id", "title", "products_count"]
