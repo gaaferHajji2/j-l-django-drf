@@ -14,7 +14,7 @@ def post_list(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     except PageNotAnInteger:
-        posts = paginator.page(paginator.num_pages)
+        posts = paginator.page(1)
     # in this way we avoid positional arguments error
     return render(request, 'blog/post/list.html', {'posts': posts});
 
