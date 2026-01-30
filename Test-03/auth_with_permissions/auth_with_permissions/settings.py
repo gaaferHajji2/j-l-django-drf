@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'auth_with_permissions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'storefront',
+        'NAME': 'jloka_drf_test_01',
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': '123',
