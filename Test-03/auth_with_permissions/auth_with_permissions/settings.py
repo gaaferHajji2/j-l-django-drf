@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'phonenumber_field',
-    'myapp',
+    'myapp.apps.MyAppConfig',
 ]
 
 REST_FRAMEWORK = {
