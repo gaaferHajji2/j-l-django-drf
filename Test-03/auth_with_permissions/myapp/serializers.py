@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth import authenticate
-from .models import CustomUser, Profile
+from .models import CustomUser, Profile, Product, Category
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -62,3 +61,35 @@ class UserSerializer(serializers.ModelSerializer):
         profile.save()
         
         return instance
+
+class CategorySerializer(serializers.ModelSerializer):
+    created_by = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'created_by']
+        read_only_fields = ['created_by']
+
+    def create(self, validated_data):
+        # Set created_by to the current authenticated user
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            validated_data['created_by'] = request.user
+        return super().create(validated_data)
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    owner = serializers.StringRelatedField(read_only=True)
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'category', 'owner']
+        read_only_fields = ['owner']
+
+    def create(self, validated_data):
+        # Set owner to the current authenticated user
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            validated_data['owner'] = request.user
+        return super().create(validated_data)
