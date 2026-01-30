@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'phonenumber_field',
-    'myapp.apps.MyAppConfig',
+    'myapp',
 ]
 
 REST_FRAMEWORK = {
@@ -138,3 +138,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# We must add this to avoid the problem of conflict with main user class
+AUTH_USER_MODEL='myapp.CustomUser'
