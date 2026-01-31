@@ -1,9 +1,32 @@
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from .models import CustomUser, Profile, Product, Category
+
+class CreateCustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'phone_number', 'password']
+        extra_kwargs = {
+            'email': {'required': True},
+        }
+
+    def validate(self, attrs):        
+        # Validate password strength (optional but recommended)
+        validate_password(attrs['password'])
+        
+        return attrs
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = CustomUser(**validated_data)
+        user.set_password(password)  # Hashes the password
+        user.save()
+        return user
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     phone_number = serializers.CharField(required=False)
+    password = serializers.CharField(required=True)
     
     def validate(self, attrs):
         email = attrs.get('email')
@@ -25,6 +48,9 @@ class LoginSerializer(serializers.Serializer):
                 "No account found with provided credentials."
             )
         
+        print("The user password is: ", user.password)
+        print("The user check password: ", user.check_password(attrs.get('password', '')))
+        print("The sent password: ", attrs)
         # Verify credentials
         if not user.check_password(attrs.get('password', '')):
             raise serializers.ValidationError(

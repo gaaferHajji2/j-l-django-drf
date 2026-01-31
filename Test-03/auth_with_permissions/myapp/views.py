@@ -4,11 +4,16 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import LoginSerializer, ProductSerializer, CategorySerializer
+from .serializers import LoginSerializer, ProductSerializer, CategorySerializer, CreateCustomerSerializer
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from .models import Product, Category, CustomUser
 from .permissions import CanManageProducts, CanViewCategories, IsOwnerOrReadOnly
+
+class CustomerAPIView(generics.CreateAPIView):
+    serializer_class = CreateCustomerSerializer
+    queryset = CustomUser.objects.all()
+    permission_classes = []
 
 # Create your views here.
 class LoginView(APIView):
