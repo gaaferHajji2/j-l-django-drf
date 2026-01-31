@@ -4,8 +4,10 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import LoginSerializer, ProfileSerializer, ProductSerializer, CategorySerializer
-from .models import Product, Category
+from .serializers import LoginSerializer, ProductSerializer, CategorySerializer
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from .models import Product, Category, CustomUser
 from .permissions import CanManageProducts, CanViewCategories, IsOwnerOrReadOnly
 
 # Create your views here.
@@ -54,3 +56,32 @@ class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_serializer_context(self):
         return { "request": self.request }
+
+class ManageUserPermissionsView(APIView):
+    def post(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            permission_codename = request.data.get('permission')
+            action = request.data.get('action')  # 'add' or 'remove'
+            
+            content_type = ContentType.objects.get_for_model(Product)
+            permission = Permission.objects.get(
+                codename=permission_codename,
+                content_type=content_type
+            )
+            
+            if action == 'add':
+                user.user_permissions.add(permission)
+                return Response({'status': 'Permission added'})
+            elif action == 'remove':
+                user.user_permissions.remove(permission)
+                return Response({'status': 'Permission removed'})
+            else:
+                return Response({'error': 'Invalid action'}, status=400)
+                
+        except (CustomUser.DoesNotExist, Permission.DoesNotExist):
+            return Response({'error': 'Invalid user or permission'}, status=400)
+
+class UserAPIView(APIView):
+    def get(self, request):
+        return CustomUser.objects.select_related('profile').filter(CustomUser__id = request.user.id)

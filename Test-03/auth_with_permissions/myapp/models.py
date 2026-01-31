@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=500, blank=True)
 
 class Category(models.Model):
