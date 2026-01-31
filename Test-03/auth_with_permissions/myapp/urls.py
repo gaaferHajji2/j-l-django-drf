@@ -13,4 +13,5 @@ urlpatterns = [
     path('categories/<int:pk>/', views.CategoryDetailView.as_view()),
     
     path('manage-permissions/<int:user_id>/', views.ManageUserPermissionsView.as_view()),
+    path('user/', views.UserAPIView.as_view())
 ]
