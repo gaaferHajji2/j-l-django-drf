@@ -48,9 +48,9 @@ class LoginSerializer(serializers.Serializer):
                 "No account found with provided credentials."
             )
         
-        print("The user password is: ", user.password)
-        print("The user check password: ", user.check_password(attrs.get('password', '')))
-        print("The sent password: ", attrs)
+        # print("The user password is: ", user.password)
+        # print("The user check password: ", user.check_password(attrs.get('password', '')))
+        # print("The sent password: ", attrs)
         # Verify credentials
         if not user.check_password(attrs.get('password', '')):
             raise serializers.ValidationError(
