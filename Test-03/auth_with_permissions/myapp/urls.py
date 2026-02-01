@@ -14,5 +14,5 @@ urlpatterns = [
     
     path('manage-permissions/<int:user_id>/', views.ManageUserPermissionsView.as_view()),
     path('user/', views.UserAPIView.as_view()),
-    path('customer/', views.CustomerAPIView.as_view()),
+    path('customer/', views.RegisterView.as_view()),
 ]

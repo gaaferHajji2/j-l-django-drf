@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -10,11 +8,23 @@ from django.contrib.contenttypes.models import ContentType
 from .models import Product, Category, CustomUser
 from .permissions import CanManageProducts, CanViewCategories, IsOwnerOrReadOnly
 
-class CustomerAPIView(generics.CreateAPIView):
+class RegisterView(APIView):
+    permission_classes = []  # No auth required
     serializer_class = CreateCustomerSerializer
-    queryset = CustomUser.objects.all()
-    permission_classes = []
 
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+
+            return Response({
+                'message': 'User created successfully.',
+                'user_id': user.id,
+                'email': user.email,
+                'username': user.username,
+                'phone_number': user.phone_number.__str__(),
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # Create your views here.
 class LoginView(APIView):
     permission_classes = []

@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import CustomUser, Profile, Product, Category
 
 class CreateCustomerSerializer(serializers.ModelSerializer):
+    password = serializers.CharField()
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'phone_number', 'password']
@@ -13,7 +14,6 @@ class CreateCustomerSerializer(serializers.ModelSerializer):
     def validate(self, attrs):        
         # Validate password strength (optional but recommended)
         validate_password(attrs['password'])
-        
         return attrs
 
     def create(self, validated_data):
