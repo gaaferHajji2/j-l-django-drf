@@ -80,6 +80,8 @@ class ManageUserPermissionsView(APIView):
             action = request.data.get('action')  # 'add' or 'remove'
             
             content_type = ContentType.objects.get_for_model(Product)
+            print("The content type is: ", content_type.id)
+            print("The permission codename is: ", permission_codename)
             permission = Permission.objects.get(
                 codename=permission_codename,
                 content_type=content_type
@@ -93,9 +95,10 @@ class ManageUserPermissionsView(APIView):
                 return Response({'status': 'Permission removed'})
             else:
                 return Response({'error': 'Invalid action'}, status=400)
-                
-        except (CustomUser.DoesNotExist, Permission.DoesNotExist):
-            return Response({'error': 'Invalid user or permission'}, status=400)
+        except Permission.DoesNotExist:
+            return Response({'error': 'Invalid permission'}, status=400)
+        except CustomUser.DoesNotExist:
+            return Response({'error': "No User Found"}, status=400)
 
 class UserAPIView(APIView):
     def get(self, request):

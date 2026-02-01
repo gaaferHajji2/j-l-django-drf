@@ -18,6 +18,11 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    class Meta:
+        permissions = [
+            ('view_categories', 'can view categories')
+        ]
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
