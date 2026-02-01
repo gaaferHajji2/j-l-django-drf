@@ -78,8 +78,16 @@ class ManageUserPermissionsView(APIView):
             user = CustomUser.objects.get(id=user_id)
             permission_codename = request.data.get('permission')
             action = request.data.get('action')  # 'add' or 'remove'
+            model_name = request.data.get('model_name')
+
+            if model_name == 'Product':
+                model_value = Product
+            elif model_name == 'Category':
+                model_value = Category
+            else:
+                return Response({ 'status': 'Model Not Valid' }, status=400)
             
-            content_type = ContentType.objects.get_for_model(Product)
+            content_type = ContentType.objects.get_for_model(model_value)
             print("The content type is: ", content_type.id)
             print("The permission codename is: ", permission_codename)
             permission = Permission.objects.get(
