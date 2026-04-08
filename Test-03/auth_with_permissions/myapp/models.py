@@ -32,4 +32,3 @@ class Product(models.Model):
         permissions = [
             ('manage_products', 'can manage products')
         ]
-
