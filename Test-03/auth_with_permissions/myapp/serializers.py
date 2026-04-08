@@ -103,7 +103,6 @@ class CategorySerializer(serializers.ModelSerializer):
             validated_data['created_by'] = request.user
         return super().create(validated_data)
 
-
 class ProductSerializer(serializers.ModelSerializer):
     owner = serializers.StringRelatedField(read_only=True)
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
