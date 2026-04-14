@@ -89,8 +89,6 @@ class ManageUserPermissionsView(APIView):
                 return Response({ 'status': 'Model Not Valid' }, status=400)
             
             content_type = ContentType.objects.get_for_model(model_value)
-            # print("The content type is: ", content_type.id)
-            # print("The permission codename is: ", permission_codename)
             permission = Permission.objects.get(
                 codename=permission_codename,
                 content_type=content_type
