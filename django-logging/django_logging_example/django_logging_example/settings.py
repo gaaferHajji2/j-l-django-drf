@@ -68,6 +68,87 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_logging_example.wsgi.application'
 
+# ====================== LOGGING CONFIGURATION ======================
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    # Formatters
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+        'detailed': {
+            'format': '{asctime} | {levelname} | {name} | {module}:{lineno} | {message}',
+            'style': '{',
+        },
+    },
+
+    # Handlers
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'detailed',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'maxBytes': 10 * 1024 * 1024,      # 10 MB
+            'backupCount': 5,                  # Keep 5 backup files
+            'formatter': 'detailed',
+            'encoding': 'utf-8',
+        },
+        'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django_errors.log'),
+            'maxBytes': 10 * 1024 * 1024,
+            'backupCount': 5,
+            'formatter': 'detailed',
+            'encoding': 'utf-8',
+        },
+    },
+
+    # Loggers
+    'loggers': {
+        # Root logger
+        '': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+        # Django core loggers
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console', 'error_file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['console', 'error_file'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        # Your custom app logger
+        'myapp': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
+
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
