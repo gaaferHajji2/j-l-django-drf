@@ -1,0 +1,64 @@
+2026-04-21 17:04:47,760 | INFO | django.utils.autoreload | autoreload:681 | Watching for file changes with StatReloader
+2026-04-21 17:06:42,183 | INFO | django.utils.autoreload | autoreload:265 | C:\Tests\j-l-django-drf\django-logging\django_logging_example\myapp\urls.py changed, reloading.
+2026-04-21 17:06:42,626 | INFO | django.utils.autoreload | autoreload:681 | Watching for file changes with StatReloader
+2026-04-21 17:07:01,873 | INFO | django.utils.autoreload | autoreload:265 | C:\Tests\j-l-django-drf\django-logging\django_logging_example\myapp\views.py changed, reloading.
+2026-04-21 17:07:02,374 | INFO | django.utils.autoreload | autoreload:681 | Watching for file changes with StatReloader
+2026-04-21 17:07:18,026 | WARNING | django.server | log:249 | "GET /my-model HTTP/1.1" 404 2359
+2026-04-21 17:07:18,169 | WARNING | django.server | log:249 | "GET /favicon.ico HTTP/1.1" 404 2368
+2026-04-21 17:07:25,126 | WARNING | django.server | log:249 | "GET / HTTP/1.1" 404 2317
+2026-04-21 17:07:32,874 | WARNING | django.server | log:249 | "GET /my-model/ HTTP/1.1" 404 2362
+2026-04-21 17:08:12,579 | WARNING | django.server | log:249 | "GET / HTTP/1.1" 404 2317
+2026-04-21 17:08:44,330 | INFO | django.utils.autoreload | autoreload:265 | C:\Tests\j-l-django-drf\django-logging\django_logging_example\django_logging_example\urls.py changed, reloading.
+2026-04-21 17:08:44,838 | INFO | django.utils.autoreload | autoreload:681 | Watching for file changes with StatReloader
+2026-04-21 17:08:58,085 | WARNING | django.server | log:249 | "GET / HTTP/1.1" 404 2321
+2026-04-21 17:09:03,736 | WARNING | django.server | log:249 | "GET /test/ HTTP/1.1" 404 2453
+2026-04-21 17:09:26,782 | INFO | myapp.views | views:11 | Info: User  accessed the homepage
+2026-04-21 17:09:26,783 | WARNING | myapp.views | views:12 | Warning: Something suspicious happened
+2026-04-21 17:09:26,783 | INFO | myapp.models | models:10 | Saving MyModel instance: JafarLoka
+2026-04-21 17:09:26,795 | INFO | myapp.models | models:10 | Saving MyModel instance: bad
+2026-04-21 17:09:26,803 | ERROR | myapp.models | models:14 | Invalid name detected: bad
+2026-04-21 17:09:26,804 | ERROR | myapp.views | views:26 | Error occurred in MyView.get()
+Traceback (most recent call last):
+  File "C:\Tests\j-l-django-drf\django-logging\django_logging_example\myapp\views.py", line 24, in get
+    1 / 0
+    ~~^~~
+ZeroDivisionError: division by zero
+2026-04-21 17:09:26,807 | ERROR | myapp.views | views:27 | This also logs the full traceback
+Traceback (most recent call last):
+  File "C:\Tests\j-l-django-drf\django-logging\django_logging_example\myapp\views.py", line 24, in get
+    1 / 0
+    ~~^~~
+ZeroDivisionError: division by zero
+2026-04-21 17:09:26,853 | INFO | django.server | log:249 | "GET /test/my-model/ HTTP/1.1" 200 5131
+2026-04-21 17:09:27,090 | INFO | django.server | log:249 | "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+2026-04-21 17:09:27,094 | INFO | django.server | log:249 | "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+2026-04-21 17:09:27,097 | INFO | django.server | log:249 | "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+2026-04-21 17:09:27,098 | INFO | django.server | log:249 | "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+2026-04-21 17:09:27,102 | INFO | django.server | log:249 | "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+2026-04-21 17:09:27,105 | INFO | django.server | log:249 | "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+2026-04-21 17:09:27,106 | INFO | django.server | log:249 | "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+2026-04-21 17:09:27,108 | INFO | django.server | log:249 | "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+2026-04-21 17:09:27,109 | INFO | django.server | log:249 | "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+2026-04-21 17:09:27,113 | INFO | django.server | log:249 | "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+2026-04-21 17:09:27,113 | INFO | django.server | log:249 | "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+2026-04-21 17:09:27,114 | INFO | django.server | log:249 | "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+2026-04-21 17:10:18,176 | INFO | django.utils.autoreload | autoreload:265 | C:\Tests\j-l-django-drf\django-logging\django_logging_example\django_logging_example\settings.py changed, reloading.
+2026-04-21 17:10:18,652 | INFO | django.utils.autoreload | autoreload:681 | Watching for file changes with StatReloader
+2026-04-21 17:10:23,874 | INFO | myapp.views | views:11 | Info: User  accessed the homepage
+2026-04-21 17:10:23,875 | WARNING | myapp.views | views:12 | Warning: Something suspicious happened
+2026-04-21 17:10:23,876 | INFO | myapp.models | models:10 | Saving MyModel instance: JafarLoka
+2026-04-21 17:10:23,891 | INFO | myapp.models | models:10 | Saving MyModel instance: bad
+2026-04-21 17:10:23,901 | ERROR | myapp.models | models:14 | Invalid name detected: bad
+2026-04-21 17:10:23,903 | ERROR | myapp.views | views:26 | Error occurred in MyView.get()
+Traceback (most recent call last):
+  File "C:\Tests\j-l-django-drf\django-logging\django_logging_example\myapp\views.py", line 24, in get
+    1 / 0
+    ~~^~~
+ZeroDivisionError: division by zero
+2026-04-21 17:10:23,906 | ERROR | myapp.views | views:27 | This also logs the full traceback
+Traceback (most recent call last):
+  File "C:\Tests\j-l-django-drf\django-logging\django_logging_example\myapp\views.py", line 24, in get
+    1 / 0
+    ~~^~~
+ZeroDivisionError: division by zero
+2026-04-21 17:10:23,950 | INFO | django.server | log:249 | "GET /test/my-model/ HTTP/1.1" 200 5131
