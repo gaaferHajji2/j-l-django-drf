@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'myapp'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +73,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'django_logging_example.wsgi.application'
 
 # ====================== LOGGING CONFIGURATION ======================
+LOG_LEVEL = 'DEBUG' if DEBUG else 'INFO'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -143,7 +148,7 @@ LOGGING = {
         # Your custom app logger
         'myapp': {
             'handlers': ['console', 'file'],
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'propagate': False,
         },
     },
