@@ -147,7 +147,7 @@ LOGGING = {
         },
         # Your custom app logger
         'myapp': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'file', 'error_file'],
             'level': LOG_LEVEL,
             'propagate': False,
         },
