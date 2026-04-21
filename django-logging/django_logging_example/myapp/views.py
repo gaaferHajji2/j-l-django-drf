@@ -1,6 +1,7 @@
 import logging
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from myapp.models import MyModel
 
 logger = logging.getLogger(__name__)
 
@@ -11,6 +12,14 @@ class MyView(APIView):
         logger.warning("Warning: Something suspicious happened")
         
         try:
+            my_model = MyModel()
+            my_model.name = 'JafarLoka'
+            my_model.save()
+
+            my_model_02 = MyModel()
+            my_model_02.name = 'bad'
+            my_model_02.save()
+
             # Simulate an error
             1 / 0
         except Exception as e:
