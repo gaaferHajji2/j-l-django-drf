@@ -58,9 +58,9 @@ class Customer(models.Model):
         (MEMBERSHIP_GOLD, 'Gold')
     ]
 
-    # first_name = models.CharField(max_length=255)
-    # last_name  = models.CharField(max_length=255)
-    # email      = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name  = models.CharField(max_length=255)
+    email      = models.EmailField(unique=True, blank=True)
     phone      = models.CharField(max_length=13)
     birth_date = models.DateField(null=True)
     membership = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
