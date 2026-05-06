@@ -2,8 +2,6 @@ from django.core.exceptions import ValidationError
 
 def validate_file_size(value):
         filesize = value.size
-
-        print(f'The size is: {filesize}')
         
         # Limit to 1MB (expressed in bytes)
         limit = 1 * 1024 * 1024 
