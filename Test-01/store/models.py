@@ -129,4 +129,5 @@ class Review(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    # We have also the FileExtensionValidator
     image = models.ImageField(upload_to='store/images', validators=[validate_file_size]) # this will store the images: media/store/images
