@@ -1,12 +1,9 @@
 from django.conf import settings
 from django.db import models
 from django.contrib import admin
-
 from django.core.validators import MinValueValidator
-
 from uuid import uuid4
-
-from store import permissions
+from store.validators import validate_file_size
 
 class Promotion(models.Model):
     description = models.CharField(max_length=255)
@@ -132,4 +129,4 @@ class Review(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='store/images') # this will store the images: media/store/images
+    image = models.ImageField(upload_to='store/images', validators=[validate_file_size]) # this will store the images: media/store/images
