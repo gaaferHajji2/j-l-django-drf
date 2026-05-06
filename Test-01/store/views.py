@@ -56,6 +56,9 @@ class ProductViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {"request": self.request}
+    
+    def get_queryset(self):
+        return Product.objects.prefetch_related("images").all()
 
     def destroy(self, request, *args, **kwargs):
         if OrderItem.objects.filter(product_id=kwargs["pk"]).count() > 0:
