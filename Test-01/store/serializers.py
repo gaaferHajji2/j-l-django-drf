@@ -211,17 +211,11 @@ class CreateOrderSerializer(serializers.Serializer):
         return cart_id
 
     def save(self, **kwargs):
-        # print(self.validated_data["cart_id"])  # type: ignore
-        # print(self.context["user_id"])
-        # print(self.context["is_staff"])
-
         customer, _ = Customer.objects.get_or_create(user_id=self.context["user_id"])
 
         with transaction.atomic():
             order = Order.objects.create(customer=customer)
-
             cartItems = CartItem.objects.select_related("product").filter(cart_id=self.validated_data["cart_id"])  # type: ignore
-
             order_items = [
                 OrderItem(
                     order=order,
@@ -233,11 +227,7 @@ class CreateOrderSerializer(serializers.Serializer):
             ]
 
             OrderItem.objects.bulk_create(order_items)
-
             Cart.objects.filter(pk = self.validated_data['cart_id']).delete() # type: ignore
-
-            print(self.__class__)
-            
             order_created.send_robust(self.__class__, order=order)
 
             return order
