@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+
     'django_filters',
     'rest_framework',
     'djoser',
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",  # Must be here
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -188,5 +191,10 @@ DJOSER = {
     },
     # other settings
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]
+
 
 AUTH_USER_MODEL='core.User'
