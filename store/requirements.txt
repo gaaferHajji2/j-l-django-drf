@@ -10,3 +10,4 @@ pillow
 PyJWT
 social-auth-app-Django
 social-auth-core
+django-cors-headers
