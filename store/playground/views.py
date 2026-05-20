@@ -1,18 +1,12 @@
 from django.shortcuts import render
-# from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-
 from django.db import transaction, connection
-
 from django.db.models import Q, F, Value, Func, ExpressionWrapper, DecimalField
-
 from django.db.models.aggregates import Count, Sum, Max, Min, Avg
-
 from django.db.models.functions import Concat
-
 from store.models import Product, OrderItem, Order, Customer, Collection
-
 from tags.models import TaggedItem
+from django.core.mail import send_mail, mail_admins, BadHeaderError
 
 # Create your views here.
 def say_hello(request):
@@ -21,26 +15,12 @@ def say_hello(request):
     # query_set = Product.objects.all() 
 
     try:
-        product = Product.objects.get(id=1) 
-    
-        # print("The Query Data Is: ", product.title) 
-    except ObjectDoesNotExist as e:
-        print("Exception Occurred-01: ", e.__str__())  
-    
-    try:
-        product_2 = Product.objects.get(pk=0) 
-    
-        # print("The Query Data With Pk is: ", product_2.title) 
-    except ObjectDoesNotExist as e:
-        print("Exception Occurred-02: ", e.__str__()) 
-
-    
-
-    # for product in query_set:
-    #     print("The Product Is: ", product) 
+        # send_mail("Jafar Loka", "Hello From Jafar Loka", "jafar@loka.com", ['jafar+1@loka.com'])
+        mail_admins('Jafar Loka-01', 'Jafar Loka', html_message='<h1>My Name is Jafar Loka</h1>')
+    except BadHeaderError as e:
+        print(f"There are errors: {e}")
 
     return render(request, 'hello.html', { 'name': 'Jafar Loka'}) 
-    # return render(request, 'hello.html') 
 
 def say_hello_2(request):
     product = Product.objects.filter(pk=3).first() 

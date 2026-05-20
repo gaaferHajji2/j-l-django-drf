@@ -164,6 +164,19 @@ INTERNAL_IPS = [
 ]
 
 # from rest_framework.pagination import PageNumberPagination
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'localhost'
+EMAIL_HOST_USER     = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT          = 25
+DEFAULT_FROM_EMAIL  = 'jafar@loka.com'
+EMAIL_USE_TLS       = False      # Set to True if using port 3026 with STARTTLS
+EMAIL_USE_SSL       = False
+EMAIL_TIMEOUT       = 10
+ADMINS              = [
+    ('JAFAR LOKA-01', 'jafar+1@loka.com'),
+    ('JAFAR LOKA-02', 'jafar+2@loka.com'),
+]
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
