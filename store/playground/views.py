@@ -6,7 +6,7 @@ from django.db.models.aggregates import Count, Sum, Max, Min, Avg
 from django.db.models.functions import Concat
 from store.models import Product, OrderItem, Order, Customer, Collection
 from tags.models import TaggedItem
-from django.core.mail import send_mail, mail_admins, BadHeaderError
+from django.core.mail import EmailMessage, send_mail, mail_admins, BadHeaderError
 
 # Create your views here.
 def say_hello(request):
@@ -16,7 +16,10 @@ def say_hello(request):
 
     try:
         # send_mail("Jafar Loka", "Hello From Jafar Loka", "jafar@loka.com", ['jafar+1@loka.com'])
-        mail_admins('Jafar Loka-01', 'Jafar Loka', html_message='<h1>My Name is Jafar Loka</h1>')
+        # mail_admins('Jafar Loka-01', 'Jafar Loka', html_message='<h1>My Name is Jafar Loka</h1>')
+        message = EmailMessage('Jafar Loka-01', 'Message From Jafar Loka', 'jafar@Loka.com', ('jafar+1@loka.com',))
+        message.attach_file('playground/static/images/images.png', mimetype='image/png')
+        message.send()
     except BadHeaderError as e:
         print(f"There are errors: {e}")
 
